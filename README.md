@@ -11,3 +11,11 @@ Imagens existentes:
 
 * humble
 * jazzy
+
+Para executar, caso necessário rode
+
+`chmod +x deploy.sh`
+
+E execute
+
+`./deploy.sh`
