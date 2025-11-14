@@ -1,0 +1,24 @@
+version: "3.9"
+
+services:
+  ros-dev:
+    build:
+      context: .
+      dockerfile: ${ROS_VERSION-humble}.Dockerfile
+    container_name: aros-dev
+    image: aros-legal-${ROS_VERSION:-humble}
+    environment:
+      - DISPLAY
+      - QT_X11_NO_MITSHM=1
+    volumes:
+      - ./data:/root/data
+      - ${WORKSPACE_PATH:-./workspace}:/home/ultra/workspace
+      - /tmp/.X11-unix:/tmp/.X11-unix
+    network_mode: host
+    ipc: host
+    devices:
+      - /dev/dri:/dev/dri
+    privileged: true
+    tty: true
+    stdin_open: true
+    command: bash
