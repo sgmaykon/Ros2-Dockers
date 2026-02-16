@@ -1,6 +1,6 @@
 # Baseia-se numa imagem custom de algum do ros-jazzy
 # link:
-# https://hub.docker.com/layers/osrf/ros/humble-desktop-full/images/sha256-71ae08a6a0aae71a2f981e066c8a1d7dd76e956abf419c04626a0c746c3ebf4f
+# https://hub.docker.com/layers/osrf/ros/jazzy-desktop-full/images/sha256-71ae08a6a0aae71a2f981e066c8a1d7dd76e956abf419c04626a0c746c3ebf4f
 FROM osrf/ros:jazzy-desktop-full
 
 ARG USERNAME=ultra
@@ -14,11 +14,17 @@ RUN apt-get update && apt-get install -y \
     vim \
     python3-pip \
     zsh \
+    ros-dev-tools \
     sudo \
-    && rm -rf /var/lib/apt/lists/*
+    ros-jazzy-rmf-dev \
+    && sudo curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key -o /usr/share/keyrings/ros-archive-keyring.gpg && rm -rf /var/lib/apt/lists/*
 
-RUN groupadd --gid $USER_GID $USERNAME \
-    && useradd --uid $USER_UID --gid $USER_GID -m $USERNAME \
+RUN  apt update &&  apt install curl gnupg2 lsb-release  && curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key  -o /usr/share/keyrings/ros-archive-keyring.gpg
+RUN apt-get clean && apt-get autoclean &&  apt-get autoremove
+
+
+RUN groupmod -n $USERNAME $(getent group $USER_GID | cut -d: -f1) \
+    && usermod -l $USERNAME -d /home/$USERNAME -m $(getent passwd $USER_UID | cut -d: -f1) \
     && usermod -aG sudo $USERNAME \
     && echo "$USERNAME ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
@@ -30,5 +36,5 @@ WORKDIR /home/$USERNAME
 USER $USERNAME
 
 SHELL ["/bin/bash", "-c"]
-RUN echo "source /opt/ros/humble/setup.bash" >> ~/.bashrc
+RUN echo "source /opt/ros/jazzy/setup.bash" >> ~/.bashrc
 CMD ["bash"]
