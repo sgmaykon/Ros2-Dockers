@@ -6,5 +6,5 @@ if [ -z "$ROS_VERSION" ]; then
 fi
 
 xhost +local:docker
-docker compose -p ${ROS_VERSION}_stack up -d --build 
+docker compose -p ${ROS_VERSION}_stack up -d --build --security-opt seccomp=unconfined
 docker compose -p ${ROS_VERSION}_stack exec ros-dev bash

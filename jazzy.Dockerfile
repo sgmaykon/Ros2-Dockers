@@ -7,21 +7,32 @@ ARG USERNAME=ultra
 ARG USER_UID=1000
 ARG USER_GID=$USER_UID
 # ARG ROOT_PASSWORD=root123
-#
-#
 # Atualiza pacotes e instala dependências extras (exemplo)
-RUN apt-get update && apt-get install -y \
+
+RUN apt-get update  && \
+    apt-get install -y \
+    ca-certificates \
+    gnupg2 \
+    curl \
+    software-properties-common \
+    lsb-release && \
+    apt-get update && \
+    DEBIAN_FRONTEND=noninteractive apt-get install -y --allow-unauthenticated --no-install-recommends \
     vim \
-    python3-pip \
     zsh \
     ros-dev-tools \
     sudo \
-    ros-jazzy-rmf-dev \
-    && sudo curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key -o /usr/share/keyrings/ros-archive-keyring.gpg && rm -rf /var/lib/apt/lists/*
+    ros-jazzy-rmf-dev && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
 
-RUN  apt update &&  apt install curl gnupg2 lsb-release  && curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key  -o /usr/share/keyrings/ros-archive-keyring.gpg
-RUN apt-get clean && apt-get autoclean &&  apt-get autoremove
+RUN apt-get update && apt-get install -y ros-jazzy-tf-transformations   
 
+RUN curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py && \
+    python3 get-pip.py --break-system-packages && \
+    rm get-pip.py
+
+RUN python3 -m pip install --break-system-packages nudged eclipse-zenoh==1.5.0 pycdr2 rosbags transforms3d
 
 RUN groupmod -n $USERNAME $(getent group $USER_GID | cut -d: -f1) \
     && usermod -l $USERNAME -d /home/$USERNAME -m $(getent passwd $USER_UID | cut -d: -f1) \
