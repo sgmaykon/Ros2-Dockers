@@ -11,7 +11,6 @@ ARG USER_GID=$USER_UID
 RUN apt-get update && apt-get install -y \
     vim \
     python3-pip \
-    sudo \
     ros-humble-gazebo-ros-pkgs \
     ros-humble-teleop-twist-joy \
 	  ros-humble-teleop-twist-keyboard \
@@ -22,6 +21,7 @@ RUN apt-get update && apt-get install -y \
 	  ros-humble-rmw-cyclonedds-cpp \
     ros-humble-slam-toolbox \
 	  ros-humble-nav2-bringup \
+    sudo \
     && rm -rf /var/lib/apt/lists/*
 RUN  apt update &&  apt install curl gnupg2 lsb-release  && curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key  -o /usr/share/keyrings/ros-archive-keyring.gpg
 RUN apt-get clean && sudo apt-get autoclean && sudo apt-get autoremove
@@ -31,8 +31,6 @@ RUN groupadd --gid $USER_GID $USERNAME \
     && usermod -aG sudo $USERNAME \
     && echo "$USERNAME ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
-# (Opcional) definir senha para root — útil pra debug manual
-# RUN echo "root:root123" | chpasswd
 
 # Cria um diretório de trabalho
 WORKDIR /home/$USERNAME
