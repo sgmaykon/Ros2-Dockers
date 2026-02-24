@@ -1,30 +1,36 @@
 # Baseia-se numa imagem custom de algume do ros-humble
 # link:
 # https://hub.docker.com/layers/osrf/ros/humble-desktop-full/images/sha256-71ae08a6a0aae71a2f981e066c8a1d7dd76e956abf419c04626a0c746c3ebf4f
-FROM osrf/ros:humble-desktop-full
+FROM ros:humble-ros-base
+
 
 ARG USERNAME=ultra
 ARG USER_UID=1000
 ARG USER_GID=$USER_UID
 # ARG ROOT_PASSWORD=root123
 
+
 RUN apt-get update && apt-get install -y \
     vim \
     python3-pip \
-    ros-humble-gazebo-ros-pkgs \
+    ros-humble-ros-gz \
     ros-humble-teleop-twist-joy \
-	  ros-humble-teleop-twist-keyboard \
-	  ros-humble-rplidar-ros \
-	  ros-humble-laser-filters \
-	  ros-humble-rqt \
-	  ros-humble-rqt-common-plugins \
-	  ros-humble-rmw-cyclonedds-cpp \
+    ros-humble-teleop-twist-keyboard \
+    ros-humble-rplidar-ros \
+    ros-humble-rviz2 \
+    libmodbus-dev \
+    ros-humble-xacro \
+    ros-humble-laser-filters \
+    ros-humble-rqt \ 
+    ros-humble-rqt-common-plugins \
+    ros-humble-rmw-cyclonedds-cpp \
     ros-humble-slam-toolbox \
-	  ros-humble-nav2-bringup \
+    ros-humble-nav2-bringup \
     ros-humble-joint-state-publisher-gui \
     sudo \
     && rm -rf /var/lib/apt/lists/*
-RUN  apt update &&  apt install curl gnupg2 lsb-release  && curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key  -o /usr/share/keyrings/ros-archive-keyring.gpg
+
+RUN  apt update &&  apt install -y curl gnupg2 lsb-release  && curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key  -o /usr/share/keyrings/ros-archive-keyring.gpg
 RUN apt-get clean && sudo apt-get autoclean && sudo apt-get autoremove
 
 RUN groupadd --gid $USER_GID $USERNAME \
