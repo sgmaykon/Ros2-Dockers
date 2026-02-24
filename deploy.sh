@@ -4,6 +4,11 @@ ROS_VERSION=$(grep ROS_VERSION .env | cut -d '=' -f2)
 if [ -z "$ROS_VERSION" ]; then
   ROS_VERSION="humble"
 fi
+INSTANCE=$(grep INSTANCE .env | cut -d '=' -f2)
+
+if [ -z "$INSTANCE" ]; then
+  INSTANCE="1"
+fi
 
 CONTAINER_SERVICE="ros-dev"
 PROJECT_NAME="${ROS_VERSION}_stack"
@@ -44,5 +49,6 @@ if [ "$DEVICE_FOUND" = false ]; then
     rm $OVERRIDE_FILE
 fi
 
-docker compose -p $PROJECT_NAME up -d --build --remove-orphans
-docker compose -p $PROJECT_NAME exec ros-dev bash
+docker compose -p $PROJECT_NAME_stack_${INSTANCE} up -d --build --remove-orphans
+
+docker compose -p $PROJECT_NAME_stack_${INSTANCE} exec ros-dev bash
