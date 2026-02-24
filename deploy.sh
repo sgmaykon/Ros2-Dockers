@@ -44,6 +44,5 @@ if [ "$DEVICE_FOUND" = false ]; then
     rm $OVERRIDE_FILE
 fi
 
-export DOCKER_DEFAULT_PLATFORM=linux/aarch64
 docker compose -p $PROJECT_NAME up -d --build --remove-orphans
 docker compose -p $PROJECT_NAME exec ros-dev bash
