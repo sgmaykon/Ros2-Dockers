@@ -48,6 +48,6 @@ if [ "$DEVICE_FOUND" = false ]; then
     echo "Nenhum device encontrado. Removendo override."
     rm $OVERRIDE_FILE
 fi
-
+docker network create rmf_network
 docker compose -p ${PROJECT_NAME}_${INSTANCE} up -d --build --remove-orphans
 docker compose -p ${PROJECT_NAME}_${INSTANCE} exec ros-dev bash

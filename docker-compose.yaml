@@ -14,16 +14,16 @@ services:
       - ${WORKSPACE_PATH:-./workspace}:/home/ultra/workspace
       - /tmp/.X11-unix:/tmp/.X11-unix
 
-    #network_mode: "host"  #Da problema com os nós, e não valida o teste de multiplos robos
+    network_mode: "host"  #Da problema com os nós, precisa mudar ROS_DOMAIN
     #ipc: host  #Costuma dar problema com gazebo por conta da RAM compartilhada. 
-    networks:
-      - rmf_network
+    #networks:
+    #  - rmf_network
       
     shm_size: '2gb' #Shared Memory Size. Aloca mais memória pro container
     tty: true
     stdin_open: true
     command: bash
 
-networks:
-  rmf_network:
-    external: true
+#networks:
+#  rmf_network:
+#    external: true
