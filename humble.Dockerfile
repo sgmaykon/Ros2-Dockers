@@ -19,19 +19,22 @@ RUN apt-get update && apt-get install -y \
     ros-humble-rplidar-ros \
     ros-humble-rviz2 \
     libmodbus-dev \
-    ros-humble-xacro \
+    #ros-humble-xacro \
     ros-humble-laser-filters \
-    ros-humble-rqt \ 
+    ros-humble-gazebo-ros-pkgs \
+    ros-humble-rqt \
     ros-humble-rqt-common-plugins \
     ros-humble-rmw-cyclonedds-cpp \
     ros-humble-slam-toolbox \
     ros-humble-nav2-bringup \
     ros-humble-joint-state-publisher-gui \
     sudo \
+    curl \
+    gnupg2 \
+    lsb-release \
+    && curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key -o /usr/share/keyrings/ros-archive-keyring.gpg \
+    && apt-get clean && sudo apt-get autoclean && sudo apt-get autoremove \
     && rm -rf /var/lib/apt/lists/*
-
-RUN  apt update &&  apt install -y curl gnupg2 lsb-release  && curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key  -o /usr/share/keyrings/ros-archive-keyring.gpg
-RUN apt-get clean && sudo apt-get autoclean && sudo apt-get autoremove
 
 RUN groupadd --gid $USER_GID $USERNAME \
     && useradd --uid $USER_UID --gid $USER_GID -m $USERNAME \

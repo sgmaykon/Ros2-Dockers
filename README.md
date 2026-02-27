@@ -19,3 +19,7 @@ Para executar, caso necessário rode
 E execute
 
 `./deploy.sh`
+
+
+Se quiser rodar mais de um container por vez usando a mesma imagem, mude
+a variável INSTANCE encontrada no .env

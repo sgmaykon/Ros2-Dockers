@@ -49,6 +49,5 @@ if [ "$DEVICE_FOUND" = false ]; then
     rm $OVERRIDE_FILE
 fi
 
-docker compose -p $PROJECT_NAME_stack_${INSTANCE} up -d --build --remove-orphans
-
-docker compose -p $PROJECT_NAME_stack_${INSTANCE} exec ros-dev bash
+docker compose -p ${PROJECT_NAME}_${INSTANCE} up -d --build --remove-orphans
+docker compose -p ${PROJECT_NAME}_${INSTANCE} exec ros-dev bash

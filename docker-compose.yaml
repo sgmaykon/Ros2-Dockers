@@ -3,7 +3,6 @@ services:
     build:
       context: .
       dockerfile: ${ROS_VERSION-humble}.Dockerfile
-    container_name: ${ROS_VERSION-humble}---aros-dev
     image: aros-legal-${ROS_VERSION:-humble}
     environment:
       - DISPLAY
@@ -12,8 +11,12 @@ services:
       - ./data:/root/data
       - ${WORKSPACE_PATH:-./workspace}:/home/ultra/workspace
       - /tmp/.X11-unix:/tmp/.X11-unix
-    network_mode: "host"
-    ipc: host
+    #network_mode: "host"  #Da problema com os nós, e não valida o teste de multiplos robos
+    #ipc: host  #Costuma dar problema com gazebo por conta da RAM compartilhada. 
+      default:
+        name: rmf_network
+        external: true
+    shm_size: '2gb' #Shared Memory Size. Aloca mais memória pro container
     tty: true
     stdin_open: true
     command: bash
