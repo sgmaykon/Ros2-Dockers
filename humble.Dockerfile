@@ -13,6 +13,7 @@ ARG USER_GID=$USER_UID
 RUN apt-get update && apt-get install -y \
     vim \
     python3-pip \
+    terminator \
     ros-humble-ros-gz \
     ros-humble-teleop-twist-joy \
     ros-humble-teleop-twist-keyboard \

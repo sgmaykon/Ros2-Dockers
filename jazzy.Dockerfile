@@ -20,6 +20,7 @@ RUN apt-get update  && \
     DEBIAN_FRONTEND=noninteractive apt-get install -y --allow-unauthenticated --no-install-recommends \
     vim \
     zsh \
+    terminator \
     ros-dev-tools \
     sudo \
     ros-jazzy-rmf-dev && \
@@ -45,6 +46,8 @@ RUN groupmod -n $USERNAME $(getent group $USER_GID | cut -d: -f1) \
 # Cria um diretório de trabalho
 WORKDIR /home/$USERNAME
 USER $USERNAME
+
+# Adicionar ENVS importantes para o bash:
 
 SHELL ["/bin/bash", "-c"]
 RUN echo "source /opt/ros/jazzy/setup.bash" >> ~/.bashrc
