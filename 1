@@ -24,6 +24,7 @@ RUN apt-get update  && \
     ros-dev-tools \
     sudo \
     ros-jazzy-rmf-dev && \
+    ros-jazzy-rmw-cyclonedds-cpp \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
@@ -51,6 +52,4 @@ USER $USERNAME
 
 SHELL ["/bin/bash", "-c"]
 RUN echo "source /opt/ros/jazzy/setup.bash" >> ~/.bashrc
-RUN echo "export RMW_IMPLEMENTATION=rmw_cyclonedds_cpp" >> ~/.bashrc
-RUN sudo apt-get install -y ros-jazzy-rmw-cyclonedds-cpp
 CMD ["bash"]

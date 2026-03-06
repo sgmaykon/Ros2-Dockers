@@ -13,7 +13,7 @@ fi
 CONTAINER_SERVICE="ros-dev"
 PROJECT_NAME="${ROS_VERSION}_stack"
 OVERRIDE_FILE="docker-compose.override.yaml"
-DEVICE_FOUNT=false
+DEVICE_FOUND=false
 xhost +local:docker
 
 # Passo 2: Defina a LISTA de dispositivos que você quer conectar.
@@ -23,6 +23,7 @@ DEVICE_PORTS=(
      "/dev/zlac"
     #"/dev/bfield"
     "/dev/input"
+    "/dev/ttyUSB0"
 )
 
 
