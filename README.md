@@ -23,3 +23,6 @@ E execute
 
 Se quiser rodar mais de um container por vez usando a mesma imagem, mude
 a variável INSTANCE encontrada no .env
+
+Por exemplo, o robô 1 em um container com INSTANCE = 1
+robô 2 com INSTANCE = 2, e assim por diante.
