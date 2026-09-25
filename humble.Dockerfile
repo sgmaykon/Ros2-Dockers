@@ -13,6 +13,7 @@ ARG USER_GID=$USER_UID
 RUN apt-get update && apt-get install -y \
     vim \
     python3-pip \
+    python3-serial \
     terminator \
     ros-humble-ros-gz \
     ros-humble-teleop-twist-joy \
@@ -22,8 +23,9 @@ RUN apt-get update && apt-get install -y \
     libmodbus-dev \
     #ros-humble-xacro \
     ros-humble-laser-filters \
-    ros-humble-gazebo-ros-pkgs \
+    #ros-humble-gazebo-ros-pkgs \
     ros-humble-rqt \
+    ros-humble-nav2-collision-monitor \
     ros-humble-rqt-common-plugins \
     ros-humble-rmw-cyclonedds-cpp \
     ros-humble-slam-toolbox \

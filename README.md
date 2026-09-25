@@ -1,6 +1,15 @@
 # Ros2-Dockers
 Imagens Docker das versões do ROS2 o mais prontas possíveis para uso, de várias versões do ROS2
 
+O script de deploy só funciona no `Docker Compose V2`
+
+Para instalar o Docker Compose V2 no ubuntu, você pode utilizar o script
+`install_docker_ubuntu.sh` disponível neste repositório
+
+Para Arch linux, basta fazer:
+
+`sudo pacman -Syu docker docker-compose docker-buildx`
+
 Pra executar, crie um arquivo env, e modifique conforme suas necessidades.
 
 Escolhe o diretório de trabalho, e qual imagem do ROS2 irá usar.

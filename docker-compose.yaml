@@ -2,7 +2,7 @@ services:
   ros-dev:
     build:
       context: .
-      dockerfile: ${ROS_VERSION-humble}.Dockerfile
+      dockerfile: ${ROS_VERSION:-humble}.Dockerfile
     image: aros-legal-${ROS_VERSION:-humble}
     environment:
       - DISPLAY

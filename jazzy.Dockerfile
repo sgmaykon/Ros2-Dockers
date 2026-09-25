@@ -23,6 +23,7 @@ RUN apt-get update  && \
     terminator \
     ros-dev-tools \
     sudo \
+    python3-venv \
     ros-jazzy-rmf-dev && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
